@@ -1,0 +1,4 @@
+dependencies {
+    compile "org.evergreen:evergreen-dbhelper:$evergreenVersion"
+    compile "mysql:mysql-connector-java:$mysqlVersion"
+}

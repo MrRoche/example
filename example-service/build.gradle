@@ -1,0 +1,4 @@
+dependencies {
+    compile project(path: ":example-dao")
+    compile "org.evergreen:evergreen-aop:$evergreenVersion"
+}

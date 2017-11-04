@@ -1,0 +1,11 @@
+//添加war插件
+apply plugin: 'war'
+//更改war插件的webAppDirName属性，更改webapp根目录的路径
+//默认值是src/main/webapp
+webAppDirName = 'web'
+
+dependencies {
+    compile project(path: ":example-service")
+    compile "org.evergreen:evergreen-mvc:$evergreenVersion"
+    compile "org.evergreen:evergreen-plugin:$evergreenVersion"
+}

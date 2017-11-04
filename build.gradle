@@ -1,0 +1,51 @@
+//为所有模块指定统一的组织名以及版本号
+allprojects {
+    group 'edu.gradle'
+    version '1.0-SNAPSHOT'
+}
+
+//为所有子模块指定通用配置
+subprojects {
+    // 添加java和idea插件
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    // 指定JDK编译版本
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // java编译时的编码
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+    // 引用maven的本地仓库以及远程仓库
+    //gradle会按照配置顺序依次查找依赖的jar
+    repositories {
+        //maven本地仓库
+        mavenLocal()
+        //maven中央仓库
+        mavenCentral()
+        //自定义远程仓库(阿里云)
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+    }
+
+    //扩展属性，统一配置依赖版本号
+    ext {
+        evergreenVersion = '1.2.1.RELEASE'
+        mysqlVersion = '5.1.35'
+        servletVersion = '3.1.0'
+        junitVersion = '4.12'
+    }
+
+    //配置公共依赖,依赖类似Maven的中的GAV坐标
+    //group：组织架构名
+    //name：项目名
+    //version：版本号
+    dependencies {
+        //完整写法
+        //testCompile group: 'junit', name: 'junit', version: '4.12'
+        //简写，$junitVersion引用上面的版本号
+        testCompile "junit:junit:$junitVersion"
+    }
+}
