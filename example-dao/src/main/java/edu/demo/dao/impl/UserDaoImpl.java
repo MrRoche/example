@@ -17,9 +17,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public Users findUserById(String uid) {
         String sql = "SELECT * FROM USER_INFO WHERE U_ID = ?";
-        SQLExecutor se = SQLExecutorFactory.getSQLExecutor();
-        BeanHandler<Users> handler = new BeanHandler<>(Users.class);
         try {
+            SQLExecutor se = SQLExecutorFactory.getSQLExecutor();
+            BeanHandler<Users> handler = new BeanHandler<>(Users.class);
             return se.executeQuery(sql, handler, uid);
         } catch (SQLException e) {
             throw new RuntimeException("Exception in findUserById", e);
@@ -29,9 +29,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<Users> findUsers() {
         String sql = "SELECT * FROM USER_INFO";
-        SQLExecutor se = SQLExecutorFactory.getSQLExecutor();
-        BeanListHandler<Users> handler = new BeanListHandler<>(Users.class);
         try {
+            SQLExecutor se = SQLExecutorFactory.getSQLExecutor();
+            BeanListHandler<Users> handler = new BeanListHandler<>(Users.class);
             return se.executeQuery(sql, handler);
         } catch (SQLException e) {
             throw new RuntimeException("Exception in findUsers", e);
@@ -41,8 +41,8 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int saveUser(Users user) {
         String sql = "INSERT INTO USER_INFO(U_ID, U_NAME, U_TEL) VALUES(?,?,?)";
-        SQLExecutor sqlExecutor = SQLExecutorFactory.getSQLExecutor();
         try {
+            SQLExecutor sqlExecutor = SQLExecutorFactory.getSQLExecutor();
             return sqlExecutor.executeUpdate(sql, user.getUid(), user.getUserName(), user.getUserName());
         } catch (SQLException e) {
             throw new RuntimeException("Exception in saveUser", e);
